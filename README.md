@@ -10,7 +10,7 @@
 
 **GitHub Repository :** [https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git](https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git)
 
-**Installation File (APK/IPA) :** [Download TaskFlow APK](build/app/outputs/flutter-apk/app-release.apk)
+**Installation File (APK) :** [Download TaskFlow APK](build/app/outputs/flutter-apk/app-release.apk)
 
 ## 1. App Concept and Design
 
@@ -90,15 +90,15 @@
 ### 2.3 App Screenshots
 
 #### Home Screen
-![Home Screen](assets/screenshots/home_screen.jpeg)
+![Home Screen](assets/screenshots/resized/home_screen.jpeg)
 *Main screen showing task list with filtering and sorting options*
 
 #### Add Task Screen
-![Add Task Screen](assets/screenshots/add_task_screen.jpeg)
+![Add Task Screen](assets/screenshots/resized/add_task_screen.jpeg)
 *Screen for creating new tasks with detailed information*
 
 #### Task Detail Screen
-![Task Detail Screen](assets/screenshots/task_detail_screen.jpeg)
+![Task Detail Screen](assets/screenshots/resized/task_detail_screen.jpeg)
 *Detailed view of a task with editing capabilities*
 
 ---
