@@ -12,6 +12,35 @@
 
 **Installation File (APK) :** [Download TaskFlow APK](build/app/outputs/flutter-apk/app-release.apk)
 
+## For Developers
+
+### Setting up the development environment
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git
+cd taskflow_mfu
+```
+
+2. Install dependencies and generate necessary files:
+```bash
+flutter pub get
+```
+
+3. Build the APK:
+```bash
+flutter build apk
+```
+
+The APK will be generated at `build/app/outputs/flutter-apk/app-release.apk`
+
+### Development Requirements
+- Flutter 3.19 or higher
+- Dart 3.2 or higher
+- Android Studio / VS Code with Flutter extensions
+- Android SDK for Android development
+- Xcode for iOS development (macOS only)
+
 ## 1. App Concept and Design
 
 ### 1.1 User Personas
