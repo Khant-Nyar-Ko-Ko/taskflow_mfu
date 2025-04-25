@@ -1,23 +1,11 @@
-# 📱 Take-home Assignment Template
-
-## 👤 Full Name  
-**Khant Nyar Ko Ko**  
-
-## 🆔 Student ID  
-**6631503061** 
-
-## 📱 App Name  
-**TaskFlow**
-
-## 🛠️ Framework Used  
-**Flutter**
-
-## 🔗 GitHub Repository  
-[https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git](https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git)
-
-## 📥 Installation File (APK/IPA)  
-[Insert link here]
-
+# 📱 Take-home Assignment
+ 
+**Full Name : Khant Nyar Ko Ko**  
+**Student ID : 6631503061** 
+**App Name : TaskFlow**
+**Framework Used : Flutter**
+**GitHub Repository :** [https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git](https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git)
+**Installation File (APK/IPA) :**
 ---
 
 ## 1. App Concept and Design
@@ -97,4 +85,78 @@
 
 (Attach image files or links here)
 
-Example:
+---
+
+## 3. Deployment (2 pts)
+
+### 3.1 Build Type  
+- [x] Debug  
+- [ ] Release  
+
+### 3.2 Platform Tested  
+- [x] Android  
+- [ ] iOS  
+
+### 3.3 Installation Guide
+
+1. Download the `.apk` file  
+2. Transfer it to your Android device  
+3. Open with a file manager and install manually
+
+---
+
+## 4. Reflection (2 pts)
+
+- Learned to manage local data using `sqflite`  
+- Faced challenges with state management — solved with `provider`  
+- Would love to add task sharing and cloud sync in the future
+
+---
+
+## 5. AI Assisted Development (Bonus)
+
+### 5.1 Idea Generation  
+**Prompt:**  
+> Suggest mobile app ideas for task and time management  
+**Result:**  
+Led to concept of a minimal yet powerful task management app
+
+---
+
+### 5.2 UI Design  
+**Prompt:**  
+> Design a task list screen with light/dark mode support in Flutter  
+**Result:**  
+Helped build modern and theme-friendly UI components
+
+---
+
+### 5.3 Code Help  
+**Prompt:**  
+> Flutter form with validation for adding new tasks  
+**Result:**  
+Used base logic from response in Add Task screen
+
+---
+
+### 5.4 Debugging  
+**Prompt:**  
+> App crashes on inserting into DB — here's the error  
+**Result:**  
+Identified incorrect database paths and null issues
+
+---
+
+### 5.5 Deployment  
+**Prompt:**  
+> How to generate APK in Flutter and install manually  
+**Result:**  
+Successfully built and tested APK on Android device
+
+---
+
+## ✅ Final Checklist  
+- [x] All sections completed  
+- [x] GitHub + install file included  
+- [x] Reflection and AI usage noted  
+
