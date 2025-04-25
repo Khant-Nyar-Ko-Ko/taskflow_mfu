@@ -12,6 +12,8 @@
 
 **Installation File (APK) :** [Download TaskFlow APK](build/app/outputs/flutter-apk/app-release.apk)
 
+> **Note:** The APK file is included in the zip file despite being in the build directory, as it's required for installation. All other build artifacts and auto-generated files are excluded.
+
 ## For Developers
 
 ### Setting up the development environment
