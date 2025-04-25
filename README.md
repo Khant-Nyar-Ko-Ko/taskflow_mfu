@@ -103,7 +103,7 @@
 
 ---
 
-## 3. Deployment (2 pts)
+## 3. Deployment
 
 ### 3.1 Build Type  
 - [x] Debug  
