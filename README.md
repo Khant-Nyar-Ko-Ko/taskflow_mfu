@@ -44,9 +44,9 @@
 2. **Add Task Screen** – form to input task details  
 3. **Task Detail Screen** – shows full task information and actions  
 
-![Home Screen](assets/screenshots/home_screen.jpeg)
-![Add Task Screen](assets/screenshots/add_task_screen.jpeg)
-![Task Detail Screen](assets/screenshots/task_detail_screen.jpeg)
+![Home Screen](assets/screenshots/small/home_screen.jpeg)
+![Add Task Screen](assets/screenshots/small/add_task_screen.jpeg)
+![Task Detail Screen](assets/screenshots/small/task_detail_screen.jpeg)
 
 ---
 
@@ -90,15 +90,15 @@
 ### 2.3 App Screenshots
 
 #### Home Screen
-![Home Screen](assets/screenshots/resized/home_screen.jpeg)
+![Home Screen](assets/screenshots/small/home_screen.jpeg)
 *Main screen showing task list with filtering and sorting options*
 
 #### Add Task Screen
-![Add Task Screen](assets/screenshots/resized/add_task_screen.jpeg)
+![Add Task Screen](assets/screenshots/small/add_task_screen.jpeg)
 *Screen for creating new tasks with detailed information*
 
 #### Task Detail Screen
-![Task Detail Screen](assets/screenshots/resized/task_detail_screen.jpeg)
+![Task Detail Screen](assets/screenshots/small/task_detail_screen.jpeg)
 *Detailed view of a task with editing capabilities*
 
 ---
