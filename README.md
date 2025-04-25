@@ -121,7 +121,7 @@
 
 ---
 
-## 4. Reflection (2 pts)
+## 4. Reflection
 
 - Learned to manage local data using `sqflite`  
 - Faced challenges with state management — solved with `provider`  
@@ -129,7 +129,7 @@
 
 ---
 
-## 5. AI Assisted Development (Bonus)
+## 5. AI Assisted Development
 
 ### 5.1 Idea Generation  
 **Prompt:**  
