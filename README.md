@@ -1,12 +1,16 @@
 # 📱 Take-home Assignment
  
 **Full Name : Khant Nyar Ko Ko**  
+
 **Student ID : 6631503061** 
+
 **App Name : TaskFlow**
+
 **Framework Used : Flutter**
+
 **GitHub Repository :** [https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git](https://github.com/Khant-Nyar-Ko-Ko/taskflow_mfu.git)
-**Installation File (APK/IPA) :**
----
+
+**Installation File (APK/IPA) :** [Download TaskFlow APK](build/app/outputs/flutter-apk/app-release.apk)
 
 ## 1. App Concept and Design
 
@@ -40,7 +44,9 @@
 2. **Add Task Screen** – form to input task details  
 3. **Task Detail Screen** – shows full task information and actions  
 
-(*Attach screenshots or describe them here*)
+![Home Screen](assets/screenshots/home_screen.jpeg)
+![Add Task Screen](assets/screenshots/add_task_screen.jpeg)
+![Task Detail Screen](assets/screenshots/task_detail_screen.jpeg)
 
 ---
 
@@ -83,7 +89,17 @@
 
 ### 2.3 App Screenshots
 
-(Attach image files or links here)
+#### Home Screen
+![Home Screen](assets/screenshots/home_screen.jpeg)
+*Main screen showing task list with filtering and sorting options*
+
+#### Add Task Screen
+![Add Task Screen](assets/screenshots/add_task_screen.jpeg)
+*Screen for creating new tasks with detailed information*
+
+#### Task Detail Screen
+![Task Detail Screen](assets/screenshots/task_detail_screen.jpeg)
+*Detailed view of a task with editing capabilities*
 
 ---
 
@@ -159,4 +175,3 @@ Successfully built and tested APK on Android device
 - [x] All sections completed  
 - [x] GitHub + install file included  
 - [x] Reflection and AI usage noted  
-

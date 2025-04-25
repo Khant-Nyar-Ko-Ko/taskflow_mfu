@@ -15,14 +15,18 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _tagController = TextEditingController();
   DateTime _dueDate = DateTime.now().add(const Duration(days: 1));
-  Priority _priority = Priority.medium;
   TimeOfDay _dueTime = TimeOfDay.now();
+  Priority _priority = Priority.medium;
+  String _category = 'General';
+  List<String> _tags = [];
 
   @override
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
+    _tagController.dispose();
     super.dispose();
   }
 
@@ -91,6 +95,22 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     }
   }
 
+  void _addTag() {
+    final tag = _tagController.text.trim();
+    if (tag.isNotEmpty && !_tags.contains(tag)) {
+      setState(() {
+        _tags.add(tag);
+        _tagController.clear();
+      });
+    }
+  }
+
+  void _removeTag(String tag) {
+    setState(() {
+      _tags.remove(tag);
+    });
+  }
+
   void _saveTask() {
     if (_formKey.currentState!.validate()) {
       final task = Task(
@@ -98,6 +118,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         description: _descriptionController.text,
         dueDate: _dueDate,
         priority: _priority,
+        category: _category,
+        tags: _tags,
       );
       context.read<TaskProvider>().addTask(task);
       Navigator.pop(context);
@@ -155,6 +177,83 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text('Category', style: theme.textTheme.titleMedium),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      value: _category,
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.category),
+                      ),
+                      items:
+                          TaskCategories.categories.map((category) {
+                            return DropdownMenuItem(
+                              value: category,
+                              child: Text(category),
+                            );
+                          }).toList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          setState(() => _category = value);
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Tags', style: theme.textTheme.titleMedium),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: _tagController,
+                            decoration: const InputDecoration(
+                              labelText: 'Add Tag',
+                              hintText: 'Enter tag and press +',
+                              prefixIcon: Icon(Icons.tag),
+                            ),
+                            onFieldSubmitted: (_) => _addTag(),
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: _addTag,
+                        ),
+                      ],
+                    ),
+                    if (_tags.isNotEmpty) ...[
+                      const SizedBox(height: 8),
+                      Wrap(
+                        spacing: 8,
+                        children:
+                            _tags.map((tag) {
+                              return Chip(
+                                label: Text(tag),
+                                deleteIcon: const Icon(Icons.close, size: 16),
+                                onDeleted: () => _removeTag(tag),
+                              );
+                            }).toList(),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text('Due Date & Time', style: theme.textTheme.titleMedium),
                     const SizedBox(height: 16),
                     Row(
@@ -180,7 +279,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 16),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16),

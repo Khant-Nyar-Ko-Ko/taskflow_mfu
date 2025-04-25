@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../providers/task_provider.dart';
 import '../models/task.dart';
 import 'add_task_screen.dart';
+import 'task_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen>
   late TabController _tabController;
   String _searchQuery = '';
   TaskSortOption _sortOption = TaskSortOption.dueDate;
+  String _selectedCategory = 'All';
 
   @override
   void initState() {
@@ -45,15 +47,18 @@ class _HomeScreenState extends State<HomeScreen>
           task.title.toLowerCase().contains(_searchQuery.toLowerCase()) ||
           task.description.toLowerCase().contains(_searchQuery.toLowerCase());
 
+      final matchesCategory =
+          _selectedCategory == 'All' || task.category == _selectedCategory;
+
       switch (_tabController.index) {
         case 0: // All tasks
-          return matchesSearch;
+          return matchesSearch && matchesCategory;
         case 1: // Active tasks
-          return matchesSearch && !task.isCompleted;
+          return matchesSearch && matchesCategory && !task.isCompleted;
         case 2: // Completed tasks
-          return matchesSearch && task.isCompleted;
+          return matchesSearch && matchesCategory && task.isCompleted;
         default:
-          return matchesSearch;
+          return matchesSearch && matchesCategory;
       }
     }).toList();
   }
@@ -138,17 +143,55 @@ class _HomeScreenState extends State<HomeScreen>
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search tasks...',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search tasks...',
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(() => _searchQuery = value);
+                  },
                 ),
-              ),
-              onChanged: (value) {
-                setState(() => _searchQuery = value);
-              },
+                const SizedBox(height: 16),
+                Consumer<TaskProvider>(
+                  builder: (context, taskProvider, child) {
+                    return FutureBuilder<List<String>>(
+                      future: taskProvider.getAllCategories(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const SizedBox.shrink();
+                        }
+                        final categories = ['All', ...snapshot.data!];
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children:
+                                categories.map((category) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 8),
+                                    child: FilterChip(
+                                      label: Text(category),
+                                      selected: _selectedCategory == category,
+                                      onSelected: (selected) {
+                                        setState(
+                                          () => _selectedCategory = category,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }).toList(),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -223,7 +266,12 @@ class TaskCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
         onTap: () {
-          // TODO: Implement task editing
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TaskDetailScreen(task: task),
+            ),
+          );
         },
         borderRadius: BorderRadius.circular(12),
         child: Padding(
@@ -234,14 +282,26 @@ class TaskCard extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      task.title,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        decoration:
-                            task.isCompleted
-                                ? TextDecoration.lineThrough
-                                : null,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          task.title,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            decoration:
+                                task.isCompleted
+                                    ? TextDecoration.lineThrough
+                                    : null,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          task.category,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Checkbox(
@@ -261,6 +321,21 @@ class TaskCard extends StatelessWidget {
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurface.withOpacity(0.7),
                   ),
+                ),
+              ],
+              if (task.tags.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Wrap(
+                  spacing: 4,
+                  children:
+                      task.tags.map((tag) {
+                        return Chip(
+                          label: Text(tag, style: theme.textTheme.bodySmall),
+                          padding: EdgeInsets.zero,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                        );
+                      }).toList(),
                 ),
               ],
               const SizedBox(height: 16),

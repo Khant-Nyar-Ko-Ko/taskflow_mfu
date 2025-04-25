@@ -5,8 +5,12 @@ import '../services/database_helper.dart';
 class TaskProvider with ChangeNotifier {
   List<Task> _tasks = [];
   final DatabaseHelper _dbHelper = DatabaseHelper.instance;
+  String _selectedCategory = 'All';
+  String _selectedTag = '';
 
   List<Task> get tasks => _tasks;
+  String get selectedCategory => _selectedCategory;
+  String get selectedTag => _selectedTag;
 
   Future<void> loadTasks() async {
     _tasks = await _dbHelper.getAllTasks();
@@ -38,5 +42,33 @@ class TaskProvider with ChangeNotifier {
     final task = _tasks.firstWhere((t) => t.id == id);
     task.isCompleted = !task.isCompleted;
     await updateTask(task);
+  }
+
+  Future<void> setCategory(String category) async {
+    _selectedCategory = category;
+    if (category == 'All') {
+      _tasks = await _dbHelper.getAllTasks();
+    } else {
+      _tasks = await _dbHelper.getTasksByCategory(category);
+    }
+    notifyListeners();
+  }
+
+  Future<void> setTag(String tag) async {
+    _selectedTag = tag;
+    if (tag.isEmpty) {
+      _tasks = await _dbHelper.getAllTasks();
+    } else {
+      _tasks = await _dbHelper.getTasksByTag(tag);
+    }
+    notifyListeners();
+  }
+
+  Future<List<String>> getAllCategories() async {
+    return await _dbHelper.getAllCategories();
+  }
+
+  Future<List<String>> getAllTags() async {
+    return await _dbHelper.getAllTags();
   }
 }

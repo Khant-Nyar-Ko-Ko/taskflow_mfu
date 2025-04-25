@@ -7,6 +7,8 @@ class Task {
   DateTime dueDate;
   bool isCompleted;
   Priority priority;
+  String category;
+  List<String> tags;
 
   Task({
     String? id,
@@ -15,7 +17,10 @@ class Task {
     required this.dueDate,
     this.isCompleted = false,
     this.priority = Priority.medium,
-  }) : id = id ?? const Uuid().v4();
+    this.category = 'General',
+    List<String>? tags,
+  }) : id = id ?? const Uuid().v4(),
+       tags = tags ?? [];
 
   Map<String, dynamic> toMap() {
     return {
@@ -25,6 +30,8 @@ class Task {
       'dueDate': dueDate.toIso8601String(),
       'isCompleted': isCompleted ? 1 : 0,
       'priority': priority.index,
+      'category': category,
+      'tags': tags.join(','),
     };
   }
 
@@ -36,8 +43,24 @@ class Task {
       dueDate: DateTime.parse(map['dueDate']),
       isCompleted: map['isCompleted'] == 1,
       priority: Priority.values[map['priority']],
+      category: map['category'] ?? 'General',
+      tags: (map['tags'] as String?)?.split(',') ?? [],
     );
   }
 }
 
 enum Priority { low, medium, high }
+
+// Predefined categories for tasks
+class TaskCategories {
+  static const List<String> categories = [
+    'General',
+    'Work',
+    'Personal',
+    'Shopping',
+    'Health',
+    'Education',
+    'Finance',
+    'Other',
+  ];
+}
